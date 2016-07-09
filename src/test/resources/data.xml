@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<dataset>
+    <student id="2" stu_number="0001" name="小明" depart="信工"/>
+    <student id="5" stu_number="0013" name="ABC" depart="化学"/>
+</dataset>
