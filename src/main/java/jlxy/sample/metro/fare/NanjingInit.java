@@ -13,7 +13,7 @@ import java.util.Set;
  *
  * @author turkeylock
  */
-public class DataInit {
+public class NanjingInit implements Init{
     public static List<Station> line1 = new ArrayList();//1号线  
     public static List<Station> line2 = new ArrayList();//2号线  
     public static List<Station> line3 = new ArrayList();//3号线  
@@ -132,4 +132,14 @@ public class DataInit {
         lineSet.add(lineS8);  
         totalStaion  = line1.size() + line2.size() + line3.size() + line10.size() + lineS1.size() + lineS8.size();  
     }  
+
+    @Override
+    public int getTotalStation() {
+        return totalStaion;
+    }
+
+    @Override
+    public Set<List<Station>> getLineSet() {
+        return lineSet;
+    }
 }

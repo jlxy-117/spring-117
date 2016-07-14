@@ -12,7 +12,7 @@ import java.util.Map;
  * @author SONY
  */
 public interface IHalfOrderDao {
-    void GetIn(String id, String station);
+    boolean GetIn(String id, String station);
     String GetOut(String id);
     void ClearAfterOut(String id);
     boolean check(String id);
