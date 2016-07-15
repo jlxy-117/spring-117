@@ -17,9 +17,9 @@
                             ">
     
     <!-- 扫描注解所在的包，注意不要包含java config的路径 -->
-    <context:component-scan base-package="jlxy.sample.aop"/>
-    <context:component-scan base-package="jlxy.sample.service"/>
-    <context:component-scan base-package="jlxy.sample.metro"/>
+    <context:component-scan base-package="spartan117.sample.aop"/>
+    <context:component-scan base-package="spartan117.sample.service"/>
+    <context:component-scan base-package="spartan117.sample.metro"/>
     
     <!-- 配置数据源 -->
     <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
@@ -62,13 +62,16 @@
     <!--JmsTemplate-->
     <bean id="jmsTemplate" class="org.springframework.jms.core.JmsTemplate" c:_-ref="connectionFactory" p:defaultDestinationName="test.queue" />
     <!--sender-->
-    <bean id="sender" class="jlxy.sample.metro.activemq.SenderServiceImpl" p:jmsTemplate-ref="jmsTemplate" />
+    <bean id="sender" class="spartan117.sample.metro.activemq.SenderServiceImpl" p:jmsTemplate-ref="jmsTemplate" />
     
     <!-- 配置事务管理器 -->
     <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager"
           p:dataSource-ref="dataSource"/>
     <tx:annotation-driven /> 
     
+    <!-- session -->
+    <context:annotation-config/>
+    <bean class="org.springframework.session.data.redis.config.annotation.web.http.RedisHttpSessionConfiguration"/>
     <!-- 配置aop -->
-    <!--<aop:aspectj-autoproxy/>-->
+    <aop:aspectj-autoproxy/>
 </beans>
