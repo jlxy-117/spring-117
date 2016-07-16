@@ -41,9 +41,11 @@ public class LoggedAdvice {
                 response = (HttpServletResponse)o1;
             }
         }
+        System.out.println("user_id"+session.getAttribute("user_id"));
         if(session.getAttribute("user_id")==null){
             try {
-                response.sendRedirect("/first");
+                //跳转页面
+                response.sendRedirect("http://localhost:8088/117project/login.php");
             } catch (IOException ex) {
                 Logger.getLogger(LoggedAdvice.class.getName()).log(Level.SEVERE, null, ex);
             }
