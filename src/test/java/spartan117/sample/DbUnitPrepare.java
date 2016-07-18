@@ -18,7 +18,7 @@ import org.springframework.stereotype.Component;
  * 数据库测试基础类
  * @author yecq
  */
-@Component
+//@Component
 public class DbUnitPrepare {
 
     private IDatabaseConnection database;

@@ -18,8 +18,8 @@ import org.springframework.web.client.RestTemplate;
  * 业务测试基础类，不开启web服务器
  * @author yecq
  */
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"classpath:applicationContext.xml"})
+//@RunWith(SpringJUnit4ClassRunner.class)
+//@ContextConfiguration(locations = {"classpath:applicationContext.xml"})
 public class TestBase {
 
     @Autowired

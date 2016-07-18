@@ -16,12 +16,13 @@
                             ">
     
     <!-- 扫描注解所在的包，注意不要包含java config的路径 -->
-    <context:component-scan base-package="jlxy.sample.aop"/>
-    <context:component-scan base-package="jlxy.sample.service"/>
+    <context:component-scan base-package="spartan117.sample.aop"/>
+    <context:component-scan base-package="spartan117.sample.service"/>
+    <context:component-scan base-package="spartan117.sample.metro"/>
     
     <!-- 几个测试基础类单独导入 -->
-    <bean class="jlxy.sample.TestBase"/>
-    <bean class="jlxy.sample.DbUnitPrepare"/>
+<!--    <bean class="jlxy.sample.TestBase"/>
+    <bean class="jlxy.sample.DbUnitPrepare"/>-->
     
     <!-- 配置数据源 -->
     <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
