@@ -46,7 +46,7 @@ public class HalfOrderMySQLController {
     }
     
     /**
-     * 首先判断有无记录 即有无逃票
+     * 首先判断有无记录 即有无逃票或记录丢失
      * 再判断是否超过三小时
      * 再判断余额是否充足
      * @param id

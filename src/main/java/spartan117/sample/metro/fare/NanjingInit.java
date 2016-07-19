@@ -9,8 +9,9 @@ import java.util.ArrayList;
 import java.util.HashSet;  
 import java.util.List;  
 import java.util.Set;  
+
 /**
- *
+ * 南京线路初始化实现
  * @author turkeylock
  */
 public class NanjingInit implements Init{
@@ -21,7 +22,8 @@ public class NanjingInit implements Init{
     public static List<Station> lineS1 = new ArrayList();//s1号线  
     public static List<Station> lineS8 = new ArrayList();//s8号线  
     public static Set<List<Station>> lineSet = new HashSet();//所有线集合  
-    public static int totalStaion = 0;//总的站点数量  
+    public static int totalStaion = 0;//总的站点数量 
+
     static {          
         //1号线  
         String line1Str = "迈皋桥、红山动物园、南京站、新模范马路、玄武门、鼓楼、珠江路、新街口、张府园、三山街、中华门、安德门、天隆寺、软件大道、花神庙、南京南站、双龙大道、河定桥、胜太路、百家湖、小龙湾、竹山路、天印大道、龙眠大道、南医大·江苏经贸学院、南京交院、中国药科大学";  

@@ -6,7 +6,7 @@
 package spartan117.sample.metro.fare;
 
 /**
- *
+ * 上海线路1、2号线实现
  * @author turkeylock
  */
 import java.util.ArrayList;  

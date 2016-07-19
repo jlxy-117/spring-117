@@ -20,10 +20,6 @@
     <context:component-scan base-package="spartan117.sample.service"/>
     <context:component-scan base-package="spartan117.sample.metro"/>
     
-    <!-- 几个测试基础类单独导入 -->
-<!--    <bean class="jlxy.sample.TestBase"/>
-    <bean class="jlxy.sample.DbUnitPrepare"/>-->
-    
     <!-- 配置数据源 -->
     <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
         <property name="locations">
@@ -62,6 +58,10 @@
           p:dataSource-ref="dataSource"/>
     <tx:annotation-driven /> 
     
-    <!-- 配置aop -->
-    <!--<aop:aspectj-autoproxy/>-->
+    <!-- session -->
+    <context:annotation-config/>
+    <bean class="org.springframework.session.data.redis.config.annotation.web.http.RedisHttpSessionConfiguration"/>
+    
+     <!--配置aop--> 
+    <aop:aspectj-autoproxy/>
 </beans>

@@ -6,7 +6,7 @@
 package spartan117.sample.metro.fare;
 
 /**
- *
+ * 上海计价
  * @author turkeylock
  */
 public class ShanghaiPrice implements IFigureOutPrice {

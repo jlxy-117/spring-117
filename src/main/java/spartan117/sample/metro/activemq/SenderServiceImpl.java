@@ -15,7 +15,7 @@ import org.springframework.jms.core.MessageCreator;
 
 /**
  *activemq发送端实现
- * @author SONY
+ * @author SONYs
  */
 public class SenderServiceImpl {
     

@@ -10,7 +10,8 @@ import java.util.LinkedHashSet;
 import java.util.List;
 
 /**
- *
+ * 计算里程最短路线与里程
+ * 
  * @author turkeylock
  */
 public class Subway {
@@ -33,9 +34,8 @@ public class Subway {
 
     //计算从s1站到s2站的最短经过路径  
     public List<Station> calculate(Station s1, Station s2) {
-        if(!isInLine(s1)||!isInLine(s2)){
-            List<Station> noStation = new ArrayList<Station>();
-            return noStation;
+        if (!isInLine(s1) || !isInLine(s2)) {
+            return null;
         }
         if (outList.size() == init.getTotalStation()) {
             List<Station> route = new ArrayList();
@@ -70,10 +70,22 @@ public class Subway {
             if (outList.contains(child)) {
                 continue;
             }
-            int shortestPath = (s1.getAllPassedStations(parent).size() - 1) + 1;//前面这个1表示计算路径需要去除自身站点，后面这个1表示增加了1站距离  
+            List<Station> r_parent = new ArrayList<>();
+            for (Station p : s1.getAllPassedStations(parent)) {
+                r_parent.add(p);
+            }
+            float shortestPath = this.getDistance(r_parent);
+
             if (s1.getAllPassedStations(child).contains(child)) {
+                List<Station> r_child = new ArrayList<>();
+                for (Station p : s1.getAllPassedStations(parent)) {
+                    r_child.add(p);
+                }
+
+                float distance = this.getDistance(r_child);
+
                 //如果s1已经计算过到此child的经过距离，那么比较出最小的距离  
-                if ((s1.getAllPassedStations(child).size() - 1) > shortestPath) {
+                if (distance > shortestPath) {
                     //重置S1到周围各站的最小路径  
                     s1.getAllPassedStations(child).clear();
                     s1.getAllPassedStations(child).addAll(s1.getAllPassedStations(parent));
@@ -91,8 +103,9 @@ public class Subway {
 
     //计算里程,遍历最短路径加上里程
     public float getDistance(List<Station> route) {
-        if(route.isEmpty())
+        if (route == null) {
             return -1;
+        }
         float sum = 0;
         for (int i = 0; i < route.size() - 1; i++) {
             for (List<Station> line : init.getLineSet()) {
@@ -111,24 +124,30 @@ public class Subway {
         List<Station> judge = new ArrayList();
         judge.add(s);
         for (List<Station> line : init.getLineSet()) {
-            if (line.contains(judge.get(0))) { 
+            if (line.contains(judge.get(0))) {
                 return true;
             }
         }
         return false;
     }
 
-    //取参数station到各个站的最短距离，相隔1站，距离为1，依次类推  
+    //取参数station到各个站的最短距离，相隔1站，距离为两站间里程，依次累加  
     public Station getShortestPath(Station station) {
-        int minPatn = Integer.MAX_VALUE;
+        Float minPatn = Float.MAX_VALUE;
         Station rets = null;
         for (Station s : station.getOrderSetMap().keySet()) {
             if (outList.contains(s)) {
                 continue;
             }
             LinkedHashSet<Station> set = station.getAllPassedStations(s);//参数station到s所经过的所有站点的集合  
-            if (set.size() < minPatn) {
-                minPatn = set.size();
+            List<Station> listSet = new ArrayList<Station>();
+            for (Station sta : set) {
+                listSet.add(sta);
+            }
+            float setDistance = this.getDistance(listSet);
+
+            if (setDistance < minPatn) {
+                minPatn = setDistance;
                 rets = s;
             }
         }
