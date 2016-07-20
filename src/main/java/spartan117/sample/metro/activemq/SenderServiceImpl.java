@@ -18,7 +18,7 @@ import org.springframework.jms.core.MessageCreator;
  * @author SONYs
  */
 public class SenderServiceImpl {
-    
+
      private JmsTemplate jmsTemplate;
     
     public JmsTemplate getjmsTemplate(){

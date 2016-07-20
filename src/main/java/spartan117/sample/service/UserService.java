@@ -49,4 +49,10 @@ public class UserService {
      public Map<String,Object> getUserInfo(String user_id){
          return this.jdbc.queryForMap("select * from user_list where id=?", user_id);
      }
+     
+     //查询用户余额
+     public Map<String,Object> getUserBalance(String user_id)
+     {
+         return this.jdbc.queryForMap("select cash from user_list where id = ?",user_id);
+     }
 }

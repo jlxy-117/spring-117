@@ -52,7 +52,14 @@ public class LoggedController {
         return us.getUsedOrderById(user_id);
     }
     
-    //查询用户所有信息
+    /**
+     * 查询用户所有信息
+     *
+     * @param user_id
+     * @param request
+     * @param response
+     * @return
+     */
     @RequestMapping(value = "/user", method = RequestMethod.GET)
     public Map<String,Object> do_getUserInfo(@RequestParam("user_id") String user_id, HttpServletRequest request, HttpServletResponse response){
         return us.getUserInfo(user_id);

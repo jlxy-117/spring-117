@@ -15,6 +15,7 @@ import spartan117.sample.metro.activemq.SenderServiceImpl;
 import spartan117.sample.metro.fare.IFigureOutPrice;
 import spartan117.sample.metro.fare.NanjingPrice;
 import spartan117.sample.metro.pass.HalfOrderDaoMySQL;
+import spartan117.sample.service.UserService;
 
 /**
  *
@@ -22,56 +23,62 @@ import spartan117.sample.metro.pass.HalfOrderDaoMySQL;
  */
 @RestController
 public class HalfOrderMySQLController {
-    
+
     @Autowired
     private HalfOrderDaoMySQL hodm;
-    
+
     @Autowired
     private SenderServiceImpl ssl;
-    
+
+    @Autowired
+    private UserService cash;
+
     /**
-     * 首先判断有无逃票
+     * 首先余额是否同步 再判断有无重复进站
+     *
      * @param id
      * @param station
-     * @return 
+     * @param balance
+     * @return
      */
     @RequestMapping(value = "/metroIn", method = RequestMethod.POST)
-    public String handleIn(@RequestParam("id") String id, @RequestParam("station") String station){
+    public String handleIn(@RequestParam("id") String id, @RequestParam("station") String station, @RequestParam("balance") String balance) {
         System.out.println("using MySQL...............................");
-        if(hodm.GetIn(id, station)){
-            return id + "........." + station;
-        }else{
+        if (Float.parseFloat(balance)!=Float.parseFloat(cash.getUserBalance(id).get("cash").toString())) {
+            return "请生成最新的二维码以进站！";
+        } else if (hodm.GetIn(id, station)) {
+            return "可通行........." + id + "........." + station;
+        } else {
             return "请去服务台!";
         }
     }
-    
+
     /**
-     * 首先判断有无记录 即有无逃票或记录丢失
-     * 再判断是否超过三小时
-     * 再判断余额是否充足
+     * 首先判断有无记录 即有无逃票或记录丢失 再判断是否超过三小时 再判断余额是否充足
+     *
      * @param id
      * @param station
      * @param balance
      * @param type
      * @param discount
-     * @return 
+     * @return
      */
     @RequestMapping(value = "/metroOut", method = RequestMethod.POST)
-    public String handleOut(@RequestParam("id") String id, @RequestParam("station") String station, @RequestParam("balance") String balance, @RequestParam("type") String type, @RequestParam("discount") String discount){
+    public String handleOut(@RequestParam("id") String id, @RequestParam("station") String station, @RequestParam("balance") String balance, @RequestParam("type") String type, @RequestParam("discount") String discount) {
         System.out.println("using MySQL...............................");
         String info = hodm.GetOut(id);
-        if("fraud".equals(info)){
+        if ("fraud".equals(info)) {
             return "请去服务台!";
-        }else{
-            if(hodm.check(id)){
+        } else {
+            if (hodm.check(id)) {
                 IFigureOutPrice price = new NanjingPrice();
                 float res = price.getPrice(info, station);
                 //打折
                 res *= Float.parseFloat(discount);
-                float temp = (float)Math.round(res*100)/100;
+                float temp = (float) Math.round(res * 100) / 100;
                 if (Float.parseFloat(balance) < temp) {
                     return "余额不足，请去服务台!";
-                }else{
+                } else {
                     //消息队列发送消息
                     if ("gift".equals(type)) {
                         //单程票
@@ -87,7 +94,7 @@ public class HalfOrderMySQLController {
                         return id + "...." + info + "...to..." + station + "....." + "票价为:" + String.valueOf(temp);
                     }
                 }
-            }else{
+            } else {
                 return "您在地铁站已停留超过3小时!请去服务台";
             }
         }

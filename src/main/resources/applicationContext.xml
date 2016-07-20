@@ -63,7 +63,7 @@
     <bean id="jmsTemplate" class="org.springframework.jms.core.JmsTemplate" c:_-ref="connectionFactory" p:defaultDestinationName="test.queue" />
     <!--sender-->
     <bean id="sender" class="spartan117.sample.metro.activemq.SenderServiceImpl" p:jmsTemplate-ref="jmsTemplate" />
-    
+
     <!-- 配置事务管理器 -->
     <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager"
           p:dataSource-ref="dataSource"/>

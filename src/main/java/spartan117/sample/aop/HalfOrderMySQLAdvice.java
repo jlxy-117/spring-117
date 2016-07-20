@@ -95,7 +95,7 @@ public class HalfOrderMySQLAdvice {
                             ssl.sendInfo(map);
                             hod.ClearAfterOut(id);
                             jdbc.update("delete from temp where id=?", id);
-                            return "单程票";
+                            return "单程票：可通行";
                         } else {
                             //个人票
                             ssl.sendInfo(hod.GetOrder(id, res[0], station, String.valueOf(temp)));

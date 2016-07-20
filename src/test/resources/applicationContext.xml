@@ -58,10 +58,6 @@
           p:dataSource-ref="dataSource"/>
     <tx:annotation-driven /> 
     
-    <!-- session -->
-    <context:annotation-config/>
-    <bean class="org.springframework.session.data.redis.config.annotation.web.http.RedisHttpSessionConfiguration"/>
-    
      <!--配置aop--> 
-    <aop:aspectj-autoproxy/>
+<!--    <aop:aspectj-autoproxy/>-->
 </beans>
