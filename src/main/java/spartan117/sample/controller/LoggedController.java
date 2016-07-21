@@ -6,6 +6,7 @@
 package spartan117.sample.controller;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
@@ -20,24 +21,34 @@ import org.springframework.web.bind.annotation.RestController;
 import spartan117.sample.service.UserService;
 
 /**
- *登录后才能做的操作
+ * 登录后才能做的操作
+ *
  * @author SONY
  */
 @RestController
 public class LoggedController {
-    
+
     @Autowired
     private UserService us;
+
+    //在前台取得session中的user_id
+    @RequestMapping(value = "/session", method = RequestMethod.GET)
+    public Map<String, Object> getSession(HttpServletRequest request, HttpServletResponse response) {
+        Map<String, Object> res = new HashMap<String, Object>();
+        res.put("user_id", request.getSession().getAttribute("user_id"));
+        return res;
+    }
+
     //用于测试
     @RequestMapping(value = "/userhaha", method = RequestMethod.GET)
-    public String UserInfo(HttpServletRequest request, HttpServletResponse response){
+    public String UserInfo(HttpServletRequest request, HttpServletResponse response) {
 //        System.out.println("logged");
         return "登陆后页面";
     }
-    
+
     //用于注销测试
     @RequestMapping(value = "/logout", method = RequestMethod.GET)
-    public void do_logout(HttpServletRequest request, HttpServletResponse response){
+    public void do_logout(HttpServletRequest request, HttpServletResponse response) {
         request.getSession().setMaxInactiveInterval(0);
         try {
             response.sendRedirect("http://localhost:8088/117project/login.php");
@@ -45,13 +56,13 @@ public class LoggedController {
             Logger.getLogger(LoggedController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
     //查询用户历史记录
     @RequestMapping(value = "/orders", method = RequestMethod.GET)
-    public List<Map<String,Object>> do_getOrdersByUserId(@RequestParam("user_id") String user_id, HttpServletRequest request, HttpServletResponse response){
+    public List<Map<String, Object>> do_getOrdersByUserId(@RequestParam("user_id") String user_id, HttpServletRequest request, HttpServletResponse response) {
         return us.getUsedOrderById(user_id);
     }
-    
+
     /**
      * 查询用户所有信息
      *
@@ -61,7 +72,7 @@ public class LoggedController {
      * @return
      */
     @RequestMapping(value = "/user", method = RequestMethod.GET)
-    public Map<String,Object> do_getUserInfo(@RequestParam("user_id") String user_id, HttpServletRequest request, HttpServletResponse response){
+    public Map<String, Object> do_getUserInfo(@RequestParam("user_id") String user_id, HttpServletRequest request, HttpServletResponse response) {
         return us.getUserInfo(user_id);
     }
 }

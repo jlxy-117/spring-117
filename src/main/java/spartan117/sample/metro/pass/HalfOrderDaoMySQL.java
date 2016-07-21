@@ -25,6 +25,17 @@ public class HalfOrderDaoMySQL implements IHalfOrderDao {
     private JdbcTemplate jdbc;
     
     /**
+     * 判断单程票订单是否已经在消费记录中
+     * 若已在其中则返回false
+     * @param id 
+     * @return true为成功进站 false为无法进站
+     */
+    public boolean checkGift(String id)
+    {
+         return this.jdbc.queryForObject("select count(*) from used_order where id = ?", new Object[]{id}, Integer.class)==0;
+    }
+
+    /**
      * 先判断有无记录
      * 再判断是不是刷卡机器的连续读取失误
      * @param id 

@@ -39,14 +39,18 @@ public class HalfOrderMySQLController {
      * @param id
      * @param station
      * @param balance
+     * @param type
      * @return
      */
     @RequestMapping(value = "/metroIn", method = RequestMethod.POST)
-    public String handleIn(@RequestParam("id") String id, @RequestParam("station") String station, @RequestParam("balance") String balance) {
+    public String handleIn(@RequestParam("id") String id, @RequestParam("station") String station, @RequestParam("balance") String balance,@RequestParam("type") String type) {
         System.out.println("using MySQL...............................");
-        if (Float.parseFloat(balance)!=Float.parseFloat(cash.getUserBalance(id).get("cash").toString())) {
+        if ("self".equals(type)&&Float.parseFloat(balance)!=Float.parseFloat(cash.getUserBalance(id).get("cash").toString())) {
             return "请生成最新的二维码以进站！";
-        } else if (hodm.GetIn(id, station)) {
+        }else if("gift".equals(type)&&!hodm.checkGift(id)){
+            return "无法使用已使用过的二维码进站！";
+        }
+        else if (hodm.GetIn(id, station)) {
             return "可通行........." + id + "........." + station;
         } else {
             return "请去服务台!";

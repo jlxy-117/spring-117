@@ -19,40 +19,46 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @Transactional
 public class UserService {
-    
+
     @Autowired
     private JdbcTemplate jdbc;
-    
+
     //通过手机号查询用户全部信息
     public Map<String,Object> searchUserByPhone(String phone){
         return this.jdbc.queryForMap("select * from user_list where phone_number=?", phone);
     }
-    
+
     //通过手机号查询用户id
     public String searchUserIdByPhone(String phone){
         Map<String,Object> map =  this.jdbc.queryForMap("select * from user_list where phone_number=?", phone);
         return map.get("id").toString();
-    }
-    
+        }
+
     //判断登录信息是否正确
     public boolean do_login(String phone, String password){
         Map<String,Object> map = searchUserByPhone(phone);
         return password.equals(map.get("user_password"));
     }
-    
+
     //通过用户id来查询订单记录
      public List<Map<String,Object>> getUsedOrderById(String id) {
         return this.jdbc.queryForList("select * from used_order where user_id = ?", id);
-     }
-     
-     //查询用户所有信息
+    }
+
+    //查询用户所有信息
      public Map<String,Object> getUserInfo(String user_id){
-         return this.jdbc.queryForMap("select * from user_list where id=?", user_id);
-     }
+        return this.jdbc.queryForMap("select * from user_list where id=?", user_id);
+    }
      
-     //查询用户余额
+     //查询所有用户信息
+     public List<Map<String,Object>> getAllUserInfo(){
+         return this.jdbc.queryForList("select * from user_list");
+     }
+             
+             
+    //查询用户余额
      public Map<String,Object> getUserBalance(String user_id)
      {
          return this.jdbc.queryForMap("select cash from user_list where id = ?",user_id);
-     }
+    }
 }
