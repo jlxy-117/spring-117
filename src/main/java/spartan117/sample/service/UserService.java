@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import spartan117.sample.paging.Pagination;
 
 /**
  *
@@ -22,7 +23,7 @@ public class UserService {
 
     @Autowired
     private JdbcTemplate jdbc;
-
+    
     //通过手机号查询用户全部信息
     public Map<String,Object> searchUserByPhone(String phone){
         return this.jdbc.queryForMap("select * from user_list where phone_number=?", phone);
@@ -53,8 +54,35 @@ public class UserService {
      //查询所有用户信息
      public List<Map<String,Object>> getAllUserInfo(){
          return this.jdbc.queryForList("select * from user_list");
+    }
+     
+     //查询指定页数用户信息
+     public List<Map<String,Object>> getUsersByPage(int page){
+        //总数据数
+        int totalCount =this.countUser();
+        Pagination p = new Pagination(totalCount);
+         //设置当前页  
+        p.setCurPage(page); //page参数，代表当前页数  
+         //获得分页大小 
+        int pageSize = p.getPageSize();
+        //获得分页数据在list集合中的索引  
+        int firstIndex = (page - 1) * pageSize;
+        int toIndex = page * pageSize;
+        if (toIndex > totalCount) {
+            toIndex = totalCount;
+        }
+        if (firstIndex > toIndex) {
+            firstIndex = 0;
+            p.setCurPage(1);
+        }
+        return this.jdbc.queryForList("select * from user_list limit ?,?",firstIndex,toIndex);
      }
-             
+      
+     //查询用户数
+     public int countUser()
+     {
+         return this.jdbc.queryForObject("select count(*) from user_list", Integer.class);
+     }
              
     //查询用户余额
      public Map<String,Object> getUserBalance(String user_id)

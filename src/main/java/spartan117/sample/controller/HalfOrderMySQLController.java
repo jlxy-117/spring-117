@@ -18,7 +18,7 @@ import spartan117.sample.metro.pass.HalfOrderDaoMySQL;
 import spartan117.sample.service.UserService;
 
 /**
- *
+ * 闸机页操作
  * @author SONY
  */
 @RestController
