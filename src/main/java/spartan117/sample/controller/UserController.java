@@ -34,7 +34,7 @@ public class UserController {
         System.out.println(".....................");
         String passwd = DigestUtils.md5Hex(password);
         Map<String,Object> map = new HashMap();
-        if(us.do_login(phone, passwd)){
+        if(us.checkUserEx(phone)&&us.do_login(phone, passwd)){
             String user_id = us.searchUserIdByPhone(phone);
             request.getSession().setAttribute("user_id", user_id);
             request.getSession().setMaxInactiveInterval(60*5);

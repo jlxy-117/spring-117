@@ -33,7 +33,7 @@ public class UserService {
     public String searchUserIdByPhone(String phone){
         Map<String,Object> map =  this.jdbc.queryForMap("select * from user_list where phone_number=?", phone);
         return map.get("id").toString();
-        }
+    }
 
     //判断登录信息是否正确
     public boolean do_login(String phone, String password){
@@ -65,7 +65,7 @@ public class UserService {
         p.setCurPage(page); //page参数，代表当前页数  
          //获得分页大小 
         int pageSize = p.getPageSize();
-        //获得分页数据在list集合中的索引  
+        //获得分页数据的索引  
         int firstIndex = (page - 1) * pageSize;
         int toIndex = page * pageSize;
         if (toIndex > totalCount) {
@@ -89,4 +89,9 @@ public class UserService {
      {
          return this.jdbc.queryForMap("select cash from user_list where id = ?",user_id);
     }
+     
+     public boolean checkUserEx(String phone)
+     {
+         return this.jdbc.queryForObject("select count(*) from user_list where phone_number = ?", new Object[]{phone}, Integer.class)==1;
+     }
 }

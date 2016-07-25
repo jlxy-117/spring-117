@@ -4,13 +4,13 @@ import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.ImportResource;
 import spartan117.sample.controllerAdmin.AdminLoginController;
 import spartan117.sample.controllerAdmin.CheckLoginInfoController;
-import spartan117.sample.controllerAdmin.UserController;
+import spartan117.sample.controllerAdmin.AdminUserController;
 
 /**
  *
  * @author yecq
  */
-@Import({LoggedController.class, SimpleController.class, UserController.class, HalfOrderMySQLController.class,UserController.class,AdminLoginController.class,CheckLoginInfoController.class})
+@Import({LoggedController.class, SimpleController.class, UserController.class, HalfOrderMySQLController.class,UserController.class,AdminLoginController.class,CheckLoginInfoController.class,AdminUserController.class})
 @ImportResource("classpath:applicationContext.xml")
 public class AllController {
 
