@@ -28,10 +28,10 @@ public class AdminLoginController {
 
     //管理员登陆请求
     @RequestMapping(value = "/Adminlogin", method = RequestMethod.GET)
-    public String adminLogin(@RequestParam("id") String id, @RequestParam("password") String password, HttpServletRequest request)throws IOException {
-        if (ado.do_login(id, password)) {
+    public String adminLogin(@RequestParam("id") String id, @RequestParam("password") String password, HttpServletRequest request) throws IOException {
+        if (ado.check_admin(id) && ado.do_login(id, password)) {
             request.getSession().setAttribute("admin_id", id);
-            request.getSession().setMaxInactiveInterval(60*5);
+            request.getSession().setMaxInactiveInterval(60 * 5);
             return "success";
         }
         return "fail";

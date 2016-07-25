@@ -32,7 +32,7 @@ public class HalfOrderDaoMySQL implements IHalfOrderDao {
      */
     public boolean checkGift(String id)
     {
-         return this.jdbc.queryForObject("select count(*) from used_order where id = ?", new Object[]{id}, Integer.class)==0;
+        return this.jdbc.queryForObject("select count(*) from used_order where id = ?", new Object[]{id}, Integer.class)==0;
     }
 
     /**

@@ -51,7 +51,7 @@ public class HalfOrderMySQLController {
             return "无法使用已使用过的二维码进站！";
         }
         else if (hodm.GetIn(id, station)) {
-            return "可通行........." + id + "........." + station;
+            return "可通行........." + station;
         } else {
             return "请去服务台!";
         }
@@ -95,7 +95,7 @@ public class HalfOrderMySQLController {
                         //个人票
                         ssl.sendInfo(hodm.GetOrder(id, info, station, String.valueOf(temp)));
                         hodm.ClearAfterOut(id);
-                        return id + "...." + info + "...to..." + station + "....." + "票价为:" + String.valueOf(temp);
+                        return "可通行..." + info + "...to..." + station + "....." + "票价为:" + String.valueOf(temp);
                     }
                 }
             } else {

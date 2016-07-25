@@ -23,4 +23,10 @@ public class AdminDAO {
     public boolean do_login(String id, String password){
         return id.equals(this.jdbc.queryForObject("select password_admin from admin_list where id = ?", new Object[]{id}, String.class));
     }
+    
+    //判断是否存在此管理员
+    public boolean check_admin(String id)
+    {
+        return jdbc.queryForObject("select count(*) from admin_list where id = ?",new Object[]{id},Integer.class)==1;
+    }
 }
