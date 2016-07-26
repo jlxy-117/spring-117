@@ -53,7 +53,7 @@ public class UserService {
      
      //查询所有用户信息
      public List<Map<String,Object>> getAllUserInfo(){
-         return this.jdbc.queryForList("select * from user_list");
+         return this.jdbc.queryForList("select * from user_list order by registered_date DESC");
     }
      
      //查询指定页数用户信息

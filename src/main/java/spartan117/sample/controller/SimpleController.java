@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @author SONY
  */
 @RestController
-@EnableAutoConfiguration
+
 public class SimpleController {
     
     @RequestMapping(value = "/testlogin", method = RequestMethod.GET)

@@ -20,10 +20,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class CheckLoginInfoController {
     @RequestMapping(value = "/CheckAdminLogin", method = RequestMethod.GET)
-    public Map<String,Object> checkAdmin(HttpServletRequest request, HttpServletResponse response) {
-        Map<String,Object> res = new HashMap<String,Object>();
-        res.put("message", "success");
-        return res;
+    public String checkAdmin(HttpServletRequest request, HttpServletResponse response) {
+        return "success";
     }
     
     //用于返回后台AdminSession至PHP

@@ -10,7 +10,7 @@ import spartan117.sample.controllerAdmin.AdminUserController;
  *
  * @author yecq
  */
-@Import({LoggedController.class, SimpleController.class, UserController.class, HalfOrderMySQLController.class,UserController.class,AdminLoginController.class,CheckLoginInfoController.class,AdminUserController.class})
+@Import({LoggedController.class, SimpleController.class, UserController.class, HalfOrderMySQLController.class,AdminLoginController.class,CheckLoginInfoController.class,AdminUserController.class})
 @ImportResource("classpath:applicationContext.xml")
 public class AllController {
 

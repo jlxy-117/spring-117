@@ -5,9 +5,11 @@
  */
 package spartan117.sample.controller;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,7 +32,7 @@ public class UserController {
     //flag为true表示登录成功，同时返回user_id
     //flag为false表示登录失败
     @RequestMapping(value = "/login", method = RequestMethod.GET)
-    public Map<String,Object> do_login(@RequestParam("phone") String phone, @RequestParam("password") String password, HttpServletRequest request){
+    public Map<String,Object> do_login(@RequestParam("phone") String phone, @RequestParam("password") String password, HttpServletRequest request,HttpServletResponse response){
         System.out.println(".....................");
         String passwd = DigestUtils.md5Hex(password);
         Map<String,Object> map = new HashMap();
@@ -43,6 +45,6 @@ public class UserController {
         }else{
             map.put("flag", false);
         }
-        return map;
+            return map;
+        }
     }
-}
