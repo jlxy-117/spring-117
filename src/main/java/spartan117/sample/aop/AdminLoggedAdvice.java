@@ -50,13 +50,5 @@ public class AdminLoggedAdvice {
                 Logger.getLogger(LoggedAdvice.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        else{
-           try {
-                //跳转页面
-                response.sendRedirect("http://localhost:8088/Admin/home.php");
-            } catch (IOException ex) {
-                Logger.getLogger(LoggedAdvice.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
     } 
 }
