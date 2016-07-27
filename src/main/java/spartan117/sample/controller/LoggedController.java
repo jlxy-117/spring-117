@@ -68,7 +68,6 @@ public class LoggedController {
      /**
      * 查询用户所有信息
      *
-     * @param user_id
      * @param request
      * @param response
      * @return

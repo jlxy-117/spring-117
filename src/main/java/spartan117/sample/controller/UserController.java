@@ -32,7 +32,7 @@ public class UserController {
     //flag为true表示登录成功，同时返回user_id
     //flag为false表示登录失败
     @RequestMapping(value = "/login", method = RequestMethod.GET)
-    public Map<String,Object> do_login(@RequestParam("phone") String phone, @RequestParam("password") String password, HttpServletRequest request,HttpServletResponse response){
+    public Map<String,Object> do_login(@RequestParam("phone") String phone, @RequestParam("password") String password, HttpServletRequest request){
         System.out.println(".....................");
         String passwd = DigestUtils.md5Hex(password);
         Map<String,Object> map = new HashMap();

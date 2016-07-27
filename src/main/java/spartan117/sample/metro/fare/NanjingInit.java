@@ -28,7 +28,7 @@ public class NanjingInit implements Init{
         //1号线  
         String line1Str = "迈皋桥、红山动物园、南京站、新模范马路、玄武门、鼓楼、珠江路、新街口、张府园、三山街、中华门、安德门、天隆寺、软件大道、花神庙、南京南站、双龙大道、河定桥、胜太路、百家湖、小龙湾、竹山路、天印大道、龙眠大道、南医大·江苏经贸学院、南京交院、中国药科大学";  
         String[] line1Arr = line1Str.split("、");  
-        float [] line1Distance = {1.2f,1.3f,1.7f,0.95f,1.1f,0.77f,0.98f,0.88f,0.93f,2.1f,2.4f,1.4f,1.7f,0.96f,1.9f,2f,1.3f,0.88f,1.1f,1.4f,1.1f,2f,1.3f,1.7f,3f,2.1f};
+        float [] line1Distance = {1.2f,1.3f,1.7f,0.95f,1.1f,0.77f,0.98f,0.88f,0.93f,2.1f,2.4f,1.4f,1.2f,0.96f,1.9f,2f,1.3f,0.88f,1.1f,1.4f,1.1f,2f,1.3f,1.7f,3f,2.1f};
         for(String s : line1Arr){  
             line1.add(new Station(s));  
         }  
