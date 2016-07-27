@@ -39,7 +39,7 @@ public class UserController {
         if(us.checkUserEx(phone)&&us.do_login(phone, passwd)){
             String user_id = us.searchUserIdByPhone(phone);
             request.getSession().setAttribute("user_id", user_id);
-            request.getSession().setMaxInactiveInterval(60*5);
+            request.getSession().setMaxInactiveInterval(60*10);
             map.put("flag", true);
             map.put("user_id", user_id);
         }else{
