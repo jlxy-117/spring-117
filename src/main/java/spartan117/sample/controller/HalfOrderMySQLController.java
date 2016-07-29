@@ -95,7 +95,7 @@ public class HalfOrderMySQLController {
                         //个人票
                         ssl.sendInfo(hodm.GetOrder(id, info, station, String.valueOf(temp)));
                         hodm.ClearAfterOut(id);
-                        return "可通行..." + info + "...to..." + station + "....." + "票价为:" + String.valueOf(temp);
+                        return "个人票:可通行..." + info + "...to..." + station + "....." + "票价为:" + String.valueOf(temp);
                     }
                 }
             } else {
