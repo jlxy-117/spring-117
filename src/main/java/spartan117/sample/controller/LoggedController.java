@@ -6,7 +6,6 @@
 package spartan117.sample.controller;
 
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
@@ -17,7 +16,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import spartan117.sample.service.UserService;
 
@@ -61,7 +59,8 @@ public class LoggedController {
 
     //查询用户历史记录
     @RequestMapping(value = "/orders", method = RequestMethod.GET)
-    public List<Map<String, Object>> do_getOrdersByUserId(@RequestParam("user_id") String user_id, HttpServletRequest request, HttpServletResponse response) {
+    public List<Map<String, Object>> do_getOrdersByUserId(HttpServletRequest request, HttpServletResponse response) {
+        String user_id = request.getSession().getAttribute("user_id").toString();
         return us.getUsedOrderById(user_id);
     }
     
